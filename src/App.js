@@ -4,7 +4,7 @@
 //nodemon server - starts the backend server (on port 5000)
 
 import React from 'react';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 //react-router-dom: installs react router, which makes it easier to route different URLs to different react components
 import "bootstrap/dist/css/bootstrap.min.css"; //imports bootstrap lmfao wtf -- for css and styling
 
@@ -15,7 +15,7 @@ import EditExercise from "./components/edit-exercise.component";
 import CreateExercise from "./components/create-exercise.component";
 import CreateUser from "./components/create-user.component";
 
-function App() {
+const App = () => {
   return (
     //need to put everything we want to be used w/ the router inside of a router element
     //all of the things below are components (Navbar, all the "exact component"s) that we still have to create
@@ -24,12 +24,16 @@ function App() {
 
     //react router maps specific URL paths to different components that will load on the page
     <Router>
-      <Navbar />
-      <br/>
-      <Route path="/" exact component = {ExercisesList} />
-      <Route path="/edit/:id" component = {EditExercise} />
-      <Route path="/create" component = {CreateExercise} />
-      <Route path="/user" component = {CreateUser} />
+      <div className='container'>
+        <Navbar />
+        <br/>
+        <Routes>
+          <Route exact path="/"  element = {<ExercisesList/>} />
+          <Route path="/edit/:id" element = {<EditExercise/>} />
+          <Route path="/create" element = {<CreateExercise/>} />
+          <Route path="/user" element = {<CreateUser/>} />
+        </Routes>
+      </div>
     </Router>
   );
 }
